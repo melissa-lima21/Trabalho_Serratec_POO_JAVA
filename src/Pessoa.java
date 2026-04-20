@@ -25,7 +25,7 @@ public abstract class Pessoa {
     public LocalDate getDataNasc(){
         return this.dataNasc;
     }
-    public void setNome(LocalDate dataNasc){
+    public void setDataNasc(LocalDate dataNasc){
         this.dataNasc = dataNasc;
     }
 
