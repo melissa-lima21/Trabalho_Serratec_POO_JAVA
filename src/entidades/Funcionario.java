@@ -101,9 +101,5 @@ public class Funcionario extends Pessoa implements Tributavel {
     public void setDescontoIr(Double descontoIr) {
         this.descontoIr = descontoIr;
     }
-
-    /// add metodo pra calcular o inss e o ir
-
-
 }
 

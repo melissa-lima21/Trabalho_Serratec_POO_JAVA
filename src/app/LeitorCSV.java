@@ -10,62 +10,70 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeitorCSV {   
-    public static void main(String[] args) {
-        String caminho = "C:\\Users\\Matheus\\Serratec\\POOJava\\TrabalhoGrupo\\Trabalho_Serratec_POO_JAVA\\src\\app\\Entrada.csv";
-        
-        try{
+public class LeitorCSV {
+
+    public List<Funcionario> ler(String caminho) {
+        // String caminho =
+        // "C:\\Users\\Matheus\\Serratec\\POOJava\\TrabalhoGrupo\\Trabalho_Serratec_POO_JAVA\\src\\app\\Entrada.csv";
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        try {
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyyMMdd");
             BufferedReader br = new BufferedReader(new FileReader(caminho));
-            List<Funcionario> funcionarios = new ArrayList<>();
+
             Funcionario funcionarioAtual = null;
             String linha;
 
-                while ((linha = br.readLine()) != null) {
-                    linha = linha.trim();
+            while ((linha = br.readLine()) != null) {
+                linha = linha.trim();
 
-                    if (linha.isEmpty()) {
-                        continue; 
-    }
-                    linha = linha.replaceAll(";$", "");
-                    String[] campos = linha.split(";");
+                if (linha.isEmpty()) {
+                    funcionarioAtual = null;
+                    continue;
+                }
 
-                    boolean isFuncionario;
+                linha = linha.replaceAll(";$", "");
+                String[] campos = linha.split(";", -1);
 
-                    try {
-                        Double.parseDouble(campos[3]);
-                        isFuncionario = true;
-                    } catch (Exception e) {
-                        isFuncionario = false;
-                    }
+                boolean isFuncionario;
 
-                    if (isFuncionario == true) {
+                try {
+                    Double.parseDouble(campos[3]);
+                    isFuncionario = true;
+                } catch (Exception e) {
+                    isFuncionario = false;
+                }
 
-                        funcionarioAtual = new Funcionario(
+                if (isFuncionario == true) {
+
+                    funcionarioAtual = new Funcionario(
                             campos[0],
                             campos[1],
                             LocalDate.parse(campos[2], formato),
-                            Double.parseDouble(campos[3])
-                        );
+                            Double.parseDouble(campos[3]));
 
-                        funcionarios.add(funcionarioAtual);
+                    funcionarios.add(funcionarioAtual);
 
-                    } else {
-    
-                        Dependente dep = new Dependente(
+                } else {
+
+                    Dependente dep = new Dependente(
                             campos[0],
                             campos[1],
                             LocalDate.parse(campos[2], formato),
-                            Parentesco.valueOf(campos[3])
-                        );
+                            Parentesco.valueOf(campos[3].toUpperCase()));
 
-                        if (funcionarioAtual != null) {
-                            funcionarioAtual.adicionarDependente(dep);
-                        }
+                    if (funcionarioAtual != null) {
+                        funcionarioAtual.adicionarDependente(dep);
                     }
-}
-        } catch (Exception e){
+                }
+            }
+
+            br.close();;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return funcionarios;
     }
 }
