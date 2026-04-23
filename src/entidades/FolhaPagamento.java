@@ -16,8 +16,12 @@ public class FolhaPagamento {
         LocalDate dataPagamento,
         double descontoInss,
         double descontoIr,
-        double salarioLiquido   
-    ) {
+        double salarioLiquido
+
+    )
+
+
+    {
         this.codigo = codigo;
         this.funcionario = funcionario;
         this.dataPagamento = dataPagamento;
@@ -25,6 +29,8 @@ public class FolhaPagamento {
         this.descontoIr = descontoIr;
         this.salarioLiquido = salarioLiquido;
     }
+
+
 
     public int getCodigo() {
         return codigo;

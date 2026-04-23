@@ -18,11 +18,11 @@ public class Dependente extends Pessoa {
             String cpf,
             LocalDate dataNasc,
             Parentesco parentesco){
-            
+
+        super(nome,cpf,dataNasc);
             validarCPF(cpf);
             validarIdade(dataNasc);
 
-            super(nome,cpf,dataNasc);
             this.parentesco = parentesco;
             CPF_Dependente.add(cpf);
     }
