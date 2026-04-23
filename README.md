@@ -1,4 +1,4 @@
-# 📚 Trabalho em Grupo — POO Java
+# 📚 Projeto Final da Disciplina de POO
 
 ---
 
