@@ -11,9 +11,9 @@
 
 ---
 
-## 🎯 Objetivo
+## 🎯 Objetivo do Trabalho
 
-Desenvolver classes, interfaces e enumeradores para o cálculo do salário de um ou vários funcionários de uma empresa.
+Desenvolver classes, interfaces e enumeradores para o cálculo do salário de um ou vários funcionários de uma empresa, abordando conceitos desenvolvidos ao longo do curso.
 
 ---
 
