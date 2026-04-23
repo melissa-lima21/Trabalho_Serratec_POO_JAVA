@@ -4,14 +4,20 @@
 
 ## 🏫 Descrição do Grupo
 
-- 👥 **Grupo** — 2
+- 👥 **Grupo** — 02
 - 🎓 **Turma** — 037
 - 📖 **Disciplina** — Programação Orientada a Objetos
 - 💻 **Linguagem** — Java
 
 ---
 
-## 👨‍💻 Integrantes
+## 🎯 Objetivo
+
+Desenvolver classes, interfaces e enumeradores para o cálculo do salário de um ou vários funcionários de uma empresa.
+
+---
+
+## 👨‍💻 Integrantes e Responsabilidades
 
 - **Bernardo da Silva** — Implementação dos pacotes e restrições do programa
 - **Bruno Vitor** — Cálculo do INSS, IR e Salário Líquido
@@ -25,15 +31,15 @@
 
 ## 🧠 Conceitos de POO Aplicados
 
-- 🔵 **Herança** — `Funcionario extends Pessoa`
-- 🟣 **Interfaces** — `CalculaDescontoINSS`, `CalculaDescontoIR`
-- 🏛️ **Classes abstratas** — `Pessoa` definida como classe abstrata base
-- 🧱 **Classe concreta** — `Funcionario` e `Dependente` implementam os comportamentos concretos
-- 🟡 **Encapsulamento** — Atributos `private` com getters/setters em todas as classes
-- 🔒 **Modificadores de acesso** — Uso de `private`, `protected` e `public` para controlar visibilidade
-- ⚠️ **Exceções** — Lançamento de `IllegalArgumentException` para CPF duplicado e dados inválidos
-- 🏷️ **Enum** — Utilizado para representar categorias fixas (ex: tipo de contrato, faixa de IR)
-- 📁 **Arquivos** — Leitura e/ou gravação de dados de funcionários em arquivo
-- 📅 **LocalDate** — Todas as datas (nascimento, admissão) são do tipo `java.time.LocalDate`
-- 📦 **Coleções** — `HashSet` para CPFs únicos, `ArrayList` para lista de dependentes
-- 📂 **Separação por pacotes** — Classes organizadas em pacotes como `model`, `interfaces`, `enums`, `util`
+- 🔵 **Herança**
+- 🟣 **Interfaces**
+- 🏛️ **Classes abstratas**
+- 🧱 **Classe concreta**
+- 🟡 **Encapsulamento**
+- 🔒 **Modificadores de acesso**
+- ⚠️ **Exceções**
+- 🏷️ **Enum**
+- 📁 **Arquivos**
+- 📅 **LocalDate**
+- 📦 **Coleções**
+- 📂 **Separação por pacotes**
