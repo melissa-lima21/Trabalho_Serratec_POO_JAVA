@@ -25,7 +25,7 @@ public class LeitorCSV {
                     linha = linha.trim();
 
                     if (linha.isEmpty()) {
-                        continue; // pula linhas em branco
+                        continue; 
     }
                     linha = linha.replaceAll(";$", "");
                     String[] campos = linha.split(";");
