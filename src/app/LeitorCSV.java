@@ -3,6 +3,8 @@ package app;
 import entidades.Dependente;
 import entidades.Funcionario;
 import enums.Parentesco;
+import exceptions.DependenteException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
@@ -13,8 +15,6 @@ import java.util.List;
 public class LeitorCSV {
 
     public List<Funcionario> ler(String caminho) {
-        // String caminho =
-        // "C:\\Users\\Matheus\\Serratec\\POOJava\\TrabalhoGrupo\\Trabalho_Serratec_POO_JAVA\\src\\app\\Entrada.csv";
         List<Funcionario> funcionarios = new ArrayList<>();
 
         try {
@@ -44,34 +44,51 @@ public class LeitorCSV {
                     isFuncionario = false;
                 }
 
-                if (isFuncionario == true) {
+                if (isFuncionario) {
 
-                    funcionarioAtual = new Funcionario(
-                            campos[0],
-                            campos[1],
-                            LocalDate.parse(campos[2], formato),
-                            Double.parseDouble(campos[3]));
+                    try {
+                        funcionarioAtual = new Funcionario(
+                                campos[0],
+                                campos[1],
+                                LocalDate.parse(campos[2], formato),
+                                Double.parseDouble(campos[3])
+                        );
 
-                    funcionarios.add(funcionarioAtual);
+                        funcionarios.add(funcionarioAtual);
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Funcionario inválido ignorado: "
+                                + campos[0] + " (" + e.getMessage() + ")");
+                        funcionarioAtual = null;
+                    }
 
                 } else {
 
-                    Dependente dep = new Dependente(
-                            campos[0],
-                            campos[1],
-                            LocalDate.parse(campos[2], formato),
-                            Parentesco.valueOf(campos[3].toUpperCase()));
+                    try {
+                        Dependente dep = new Dependente(
+                                campos[0],
+                                campos[1],
+                                LocalDate.parse(campos[2], formato),
+                                Parentesco.valueOf(campos[3].toUpperCase())
+                        );
 
-                    if (funcionarioAtual != null) {
-                        funcionarioAtual.adicionarDependente(dep);
+                        if (funcionarioAtual != null) {
+                            funcionarioAtual.adicionarDependente(dep);
+                        }
+
+                    } catch (DependenteException e) {
+                        System.out.println("Dependente inválido ignorado: "
+                                + campos[0] + " (" + e.getMessage() + ")");
+                    } catch (Exception e) {
+                        System.out.println("Erro inesperado na linha: " + linha);
                     }
                 }
             }
 
-            br.close();;
+            br.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erro inesperado: " + e.getMessage());
         }
 
         return funcionarios;

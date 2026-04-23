@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 public class Funcionario extends Pessoa implements Tributavel {
-    private Double salarioBruto;
-    private Double descontoInss;
-    private Double descontoIr;
-    private Double salarioLiquido;
+    private double salarioBruto;
+    private double descontoInss;
+    private double descontoIr;
+    private double salarioLiquido;
     private List<Dependente> dependentes = new ArrayList<>();
     private static final Set<String> CPF_Funcionarios = new HashSet<>();
 
@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa implements Tributavel {
             String nome,
             String cpf,
             LocalDate dataNasc,
-            Double salarioBruto){
+            double salarioBruto){
 
         super(nome, cpf, dataNasc);
         validarCPF(cpf);
@@ -86,7 +86,7 @@ public class Funcionario extends Pessoa implements Tributavel {
         this.salarioBruto = salarioBruto;
     }
 
-    public Double getDescontoInss() {
+    public double getDescontoInss() {
         return descontoInss;
     }
 
@@ -94,7 +94,7 @@ public class Funcionario extends Pessoa implements Tributavel {
         this.descontoInss = descontoInss;
     }
 
-    public Double getDescontoIr() {
+    public double getDescontoIr() {
         return descontoIr;
     }
 
