@@ -1,14 +1,11 @@
 package entidades;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.HashSet;
-import java.util.Set;
-
 import enums.Parentesco;
 import exceptions.DependenteException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Dependente extends Pessoa {
     private static final Set<String> CPF_Dependente = new HashSet<>();
