@@ -10,6 +10,7 @@ public class Funcionario extends Pessoa implements Tributavel {
     private Double salarioBruto;
     private Double descontoInss;
     private Double descontoIr;
+    private Double salarioLiquido;
     private List<Dependente> dependentes = new ArrayList<>();
     private static final Set<String> CPF_Funcionarios = new HashSet<>();
 
@@ -70,7 +71,10 @@ public class Funcionario extends Pessoa implements Tributavel {
         return (baseCalculo * aliquota) - deducao;
     }
 
-
+    @Override
+    public double calcularSalarioLiquido(){
+        return salarioLiquido = salarioBruto - calcularDescontoIr() - calcularDescontoInss();
+    }
 
 
 
