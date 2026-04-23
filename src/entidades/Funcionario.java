@@ -10,14 +10,11 @@ public class Funcionario extends Pessoa {
             String nome,
             String cpf,
             LocalDate dataNasc,
-            Double salarioBruto,
-            Double descontoInss,
-            Double descontoIr){
+            Double salarioBruto
+        ){
 
         super(nome, cpf, dataNasc);
         this.salarioBruto = salarioBruto;
-        this.descontoInss = descontoInss;
-        this.descontoIr = descontoIr;
     }
 
 }

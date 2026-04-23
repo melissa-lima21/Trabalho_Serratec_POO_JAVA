@@ -1,9 +1,8 @@
 package entidades;
-import java.time.LocalDate;
-import java.time.Period;
-
 import enums.Parentesco;
 import exceptions.DependenteException;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Dependente extends Pessoa {
     private Parentesco parentesco;
