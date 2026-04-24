@@ -82,6 +82,10 @@ public class Funcionario extends Pessoa implements Tributavel {
         dependentes.add(dependente);
     }
 
+    public Double getSalarioBruto() {
+        return salarioBruto;
+    }
+
     public void setSalarioBruto(Double salarioBruto) {
         this.salarioBruto = salarioBruto;
     }
@@ -101,9 +105,4 @@ public class Funcionario extends Pessoa implements Tributavel {
     public void setDescontoIr(Double descontoIr) {
         this.descontoIr = descontoIr;
     }
-
-    /// add metodo pra calcular o inss e o ir
-
-
 }
-

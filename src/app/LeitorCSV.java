@@ -3,6 +3,8 @@ package app;
 import entidades.Dependente;
 import entidades.Funcionario;
 import enums.Parentesco;
+import sql.FuncionaioDAO;
+import sql.DependenteDAO;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
@@ -19,6 +21,8 @@ public class LeitorCSV {
             BufferedReader br = new BufferedReader(new FileReader(caminho));
             List<Funcionario> funcionarios = new ArrayList<>();
             Funcionario funcionarioAtual = null;
+            FuncionaioDAO fdao = new FuncionaioDAO();
+            DependenteDAO ddao =new DependenteDAO();
             String linha;
 
                 while ((linha = br.readLine()) != null) {
@@ -49,6 +53,7 @@ public class LeitorCSV {
                         );
 
                         funcionarios.add(funcionarioAtual);
+                        fdao.salvar(funcionarioAtual);
 
                     } else {
     
@@ -61,6 +66,8 @@ public class LeitorCSV {
 
                         if (funcionarioAtual != null) {
                             funcionarioAtual.adicionarDependente(dep);
+                            int idAtual = fdao.salvar(funcionarioAtual);
+                            ddao.salvar(dep, idAtual);
                         }
                     }
 }

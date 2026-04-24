@@ -1,0 +1,11 @@
+SELECT * FROM public.funcionario
+ORDER BY id_funcionario ASC;
+
+SELECT * FROM public.dependente
+ORDER BY id_dependente ASC;
+
+SELECT * FROM public.pessoa
+ORDER BY id_pessoa ASC;
+
+SELECT * FROM public.folha_pagamento
+ORDER BY id_folha ASC;
