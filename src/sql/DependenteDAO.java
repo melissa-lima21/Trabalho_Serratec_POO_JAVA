@@ -7,11 +7,17 @@ import sql.ConexaoBanco;
 import entidades.Dependente;
 
 public class DependenteDAO {
+    private Connection conectar;
+
+    public DependenteDAO() {
+        conectar = new ConexaoBanco().getConnection();
+    }
 
     public void salvar(Dependente d, int idFuncionario) throws Exception {
+
         String sql = "INSERT INTO dependente (nome, cpf, data_nasc, parentesco, id_funcionario) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = ConexaoBanco.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            PreparedStatement stmt = conectar.prepareStatement(sql);
             
             stmt.setString(1, d.getNome());
             stmt.setString(2, d.getCpf());

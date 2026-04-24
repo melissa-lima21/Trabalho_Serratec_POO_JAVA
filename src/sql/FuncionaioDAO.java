@@ -9,17 +9,24 @@ import sql.ConexaoBanco;
 import entidades.Funcionario;
 
 public class FuncionaioDAO {
+    private Connection conectar;
+
+    public FuncionaioDAO() {
+        conectar = new ConexaoBanco().getConnection();
+    }
 
     public int salvar(Funcionario f) throws Exception {
         String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, salario_bruto) VALUES (?, ?, ?, ?)";
-        try (Connection conn = ConexaoBanco.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            
+        try {
+
+            PreparedStatement stmt = conectar.prepareStatement(sql);
+
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getCpf());
             stmt.setDate(3, java.sql.Date.valueOf(f.getDataNasc()));
-            stmt.setDouble(4, f.getSalarioBruto());;
-            
+            stmt.setDouble(4, f.getSalarioBruto());
+            ;
+
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -31,15 +38,18 @@ public class FuncionaioDAO {
                 }
                 e.printStackTrace();
             }
-            return -1;
+        } catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
         }
+        return 0;
     }
-    
+
     public int buscarIdPorCpf(String cpf) {
         String sql = "SELECT id_funcionario FROM funcionario WHERE cpf = ?";
-        try (Connection conn = ConexaoBanco.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+        try {
+
+            PreparedStatement stmt = conectar.prepareStatement(sql);
+
             stmt.setString(1, cpf);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {

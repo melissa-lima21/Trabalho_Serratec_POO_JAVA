@@ -9,7 +9,20 @@ public class ConexaoBanco {
     private static final String USER = "postgres";
     private static final String PASS = "1234";
 
-    public static Connection conectar() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASS);
+    private Connection connection;
+
+    public Connection getConnection() {
+        System.out.println("Testando conexão...");
+        try {
+            connection = (Connection) DriverManager.getConnection(URL, USER, PASS);
+            if (connection != null) {
+                System.out.println("Conectado com sucesso!");
+            } else {
+                System.out.println("Erro nos dados da conexão! Verifique, porfavor e tente novamente.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Não foi possível conectar ao banco.\n" + e.getMessage());
+        }
+        return connection;
     }
 }
