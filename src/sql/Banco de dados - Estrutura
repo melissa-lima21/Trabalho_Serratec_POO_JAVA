@@ -1,0 +1,45 @@
+-- Criando o banco de dados
+-- CREATE DATABASE Trabalho_Serratec_POO_JAVA;
+
+-- Criando a tabela de funcionários
+CREATE TABLE funcionario (
+    id_funcionario SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    data_nascimento DATE NOT NULL,
+    salario_bruto NUMERIC(10, 2) NOT NULL
+);
+
+-- Definindo os possíveis graus de parentesco
+CREATE TYPE parentesco_dependente AS ENUM (
+    'FILHO',
+    'SOBRINHO',
+    'OUTRO'
+);
+
+-- Criando a tabela de dependentes
+CREATE TABLE dependente (
+    id_dependente SERIAL PRIMARY KEY,
+    id_funcionario INT REFERENCES funcionario(id_funcionario),
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    data_nascimento DATE NOT NULL,
+    parentesco parentesco_dependente NOT NULL
+);
+
+-- Criando a tabela de pessoas
+CREATE TABLE pessoa (
+    id_pessoa SERIAL PRIMARY KEY,
+    id_funcionario INT REFERENCES funcionario(id_funcionario),
+	id_dependente INT REFERENCES dependente(id_dependente)
+);
+
+-- Criando a tabela de folha de pagamento
+CREATE TABLE folha_pagamento (
+    id_folha SERIAL PRIMARY KEY,
+    id_funcionario INT REFERENCES funcionario(id_funcionario),
+    data_pagamento DATE NOT NULL,
+    desconto_inss NUMERIC(10, 2) NOT NULL,
+    desconto_ir NUMERIC(10, 2) NOT NULL,
+    salario_liquido NUMERIC(10, 2) NOT NULL
+);

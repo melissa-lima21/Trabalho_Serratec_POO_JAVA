@@ -3,8 +3,13 @@ package app;
 import entidades.Dependente;
 import entidades.Funcionario;
 import enums.Parentesco;
+<<<<<<< HEAD
 import exceptions.DependenteException;
 
+=======
+import sql.FuncionaioDAO;
+import sql.DependenteDAO;
+>>>>>>> master
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
@@ -22,6 +27,8 @@ public class LeitorCSV {
             BufferedReader br = new BufferedReader(new FileReader(caminho));
 
             Funcionario funcionarioAtual = null;
+            FuncionaioDAO fdao = new FuncionaioDAO();
+            DependenteDAO ddao =new DependenteDAO();
             String linha;
 
             while ((linha = br.readLine()) != null) {
@@ -55,6 +62,7 @@ public class LeitorCSV {
                         );
 
                         funcionarios.add(funcionarioAtual);
+                        fdao.salvar(funcionarioAtual);
 
                     } catch (IllegalArgumentException e) {
                         System.out.println("Funcionario inválido ignorado: "
@@ -74,6 +82,8 @@ public class LeitorCSV {
 
                         if (funcionarioAtual != null) {
                             funcionarioAtual.adicionarDependente(dep);
+                            int idAtual = fdao.salvar(funcionarioAtual);
+                            ddao.salvar(dep, idAtual);
                         }
 
                     } catch (DependenteException e) {
