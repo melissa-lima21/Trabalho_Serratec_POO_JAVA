@@ -25,7 +25,8 @@ public class DependenteDAO {
             stmt.setString(4, d.getParentesco().name());
             stmt.setInt(5,idFuncionario);
             
-            stmt.executeUpdate();
+            stmt.execute();
+            stmt.close();
         } catch (SQLException e) {
             if (e.getSQLState().equals("23505")) {
                 throw new Exception("Erro: CPF " + d.getCpf() + " já cadastrado no banco!");

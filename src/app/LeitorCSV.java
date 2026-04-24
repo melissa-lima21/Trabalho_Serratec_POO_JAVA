@@ -4,7 +4,7 @@ import entidades.Dependente;
 import entidades.Funcionario;
 import enums.Parentesco;
 import exceptions.DependenteException;
-import sql.FuncionaioDAO;
+import sql.FuncionarioDAO;
 import sql.DependenteDAO;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,14 +23,14 @@ public class LeitorCSV {
             BufferedReader br = new BufferedReader(new FileReader(caminho));
 
             Funcionario funcionarioAtual = null;
-            FuncionaioDAO fdao = new FuncionaioDAO();
+            FuncionarioDAO fdao = new FuncionarioDAO();
             DependenteDAO ddao =new DependenteDAO();
             String linha;
 
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
 
-                if (linha.isEmpty()) {
+                if (linha.isBlank()) {
                     funcionarioAtual = null;
                     continue;
                 }
@@ -56,7 +56,7 @@ public class LeitorCSV {
                                 LocalDate.parse(campos[2], formato),
                                 Double.parseDouble(campos[3])
                         );
-
+                        System.out.println(funcionarioAtual.getNome());
                         funcionarios.add(funcionarioAtual);
                         fdao.salvar(funcionarioAtual);
 
@@ -96,7 +96,6 @@ public class LeitorCSV {
         } catch (Exception e) {
             System.out.println("Erro inesperado: " + e.getMessage());
         }
-
         return funcionarios;
     }
 }
