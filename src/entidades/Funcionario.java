@@ -105,9 +105,4 @@ public class Funcionario extends Pessoa implements Tributavel {
     public void setDescontoIr(Double descontoIr) {
         this.descontoIr = descontoIr;
     }
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> master

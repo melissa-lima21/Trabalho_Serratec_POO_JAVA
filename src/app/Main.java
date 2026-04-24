@@ -1,6 +1,5 @@
 package app;
 
-<<<<<<< HEAD
 import entidades.Funcionario;
 import entidades.FolhaPagamento;
 import service.CalculadoraFolhaPagamento;
@@ -38,13 +37,5 @@ public class Main {
         }
 
         sc.close();
-=======
-import java.io.File;
-
-public class Main {
-    public static void main(String[] args) {
-        File arquivo = new
-        File("Entrada.csv");
->>>>>>> master
     }
 }

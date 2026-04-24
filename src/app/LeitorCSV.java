@@ -3,13 +3,9 @@ package app;
 import entidades.Dependente;
 import entidades.Funcionario;
 import enums.Parentesco;
-<<<<<<< HEAD
 import exceptions.DependenteException;
-
-=======
 import sql.FuncionaioDAO;
 import sql.DependenteDAO;
->>>>>>> master
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
