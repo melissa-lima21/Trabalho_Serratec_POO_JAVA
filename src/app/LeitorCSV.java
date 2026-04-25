@@ -23,14 +23,16 @@ public class LeitorCSV {
             BufferedReader br = new BufferedReader(new FileReader(caminho));
 
             Funcionario funcionarioAtual = null;
+
             FuncionarioDAO fdao = new FuncionarioDAO();
-            DependenteDAO ddao =new DependenteDAO();
+            DependenteDAO ddao = new DependenteDAO();
+
             String linha;
 
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
 
-                if (linha.isBlank()) {
+                if (linha.isEmpty()) {
                     funcionarioAtual = null;
                     continue;
                 }
@@ -56,7 +58,7 @@ public class LeitorCSV {
                                 LocalDate.parse(campos[2], formato),
                                 Double.parseDouble(campos[3])
                         );
-                        System.out.println(funcionarioAtual.getNome());
+
                         funcionarios.add(funcionarioAtual);
                         fdao.salvar(funcionarioAtual);
 
@@ -75,11 +77,10 @@ public class LeitorCSV {
                                 LocalDate.parse(campos[2], formato),
                                 Parentesco.valueOf(campos[3].toUpperCase())
                         );
-
                         if (funcionarioAtual != null) {
                             funcionarioAtual.adicionarDependente(dep);
-                            int idAtual = fdao.salvar(funcionarioAtual);
-                            ddao.salvar(dep, idAtual);
+
+                            ddao.salvar(dep, funcionarioAtual.getCpf());
                         }
 
                     } catch (DependenteException e) {
@@ -96,6 +97,7 @@ public class LeitorCSV {
         } catch (Exception e) {
             System.out.println("Erro inesperado: " + e.getMessage());
         }
+
         return funcionarios;
     }
 }

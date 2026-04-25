@@ -14,16 +14,15 @@ public class ConexaoBanco {
     public Connection getConnection() {
         System.out.println("Testando conexão...");
         try {
-            connection = (Connection) DriverManager.getConnection(URL, USER, PASS);
-            if (connection != null) {
-                System.out.println("Conectado com sucesso!");
-            } else {
-                System.out.println("Erro nos dados da conexão! Verifique, porfavor e tente novamente.");
-            }
+
+            connection = DriverManager.getConnection(URL, USER, PASS);
+
+            System.out.println("Conectado com sucesso!");
+
         } catch (SQLException e) {
-            System.err.println("Não foi possível conectar ao banco.\n" + e.getMessage());
+            System.err.println("Erro ao conectar: " + e.getMessage());
         }
+
         return connection;
     }
-
 }

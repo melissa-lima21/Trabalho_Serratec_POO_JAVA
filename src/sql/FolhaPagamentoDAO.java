@@ -23,8 +23,10 @@ public class FolhaPagamentoDAO {
             stmt.setDouble(3, p.getDescontoIr());
             stmt.setDouble(4, p.getSalarioLiquido());
             stmt.setInt(5, idFuncionario);
-            
-            stmt.executeUpdate();
+
+            stmt.execute();
+            stmt.close();
+
         } catch (Exception e){
             System.out.println("Erro: " + e.getMessage());
         }

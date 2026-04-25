@@ -15,38 +15,33 @@ public class FuncionarioDAO {
         conectar = new ConexaoBanco().getConnection();
     }
 
-    public int salvar(Funcionario f) throws Exception {
-        String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, salario_bruto) VALUES (?, ?, ?, ?)";
+    public void salvar(Funcionario f) throws Exception {
+        System.out.println(conectar);
 
-        try (PreparedStatement stmt = conectar.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        String sql = "INSERT INTO funcionario (nome, cpf, data_nascimento, salario_bruto) VALUES (?, ?, ?, ?)";
+        try {
+
+            PreparedStatement stmt = conectar.prepareStatement(sql);
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getCpf());
             stmt.setDate(3, java.sql.Date.valueOf(f.getDataNasc()));
             stmt.setDouble(4, f.getSalarioBruto());
-            stmt.execute();
 
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-            }
+            stmt.execute();
             stmt.close();
-        } catch (SQLException e) {
-            if ("23505".equals(e.getSQLState())) {
-                throw new Exception("Erro: CPF " + f.getCpf() + " já cadastrado no banco!");
-            }
-            throw e;
+
+        } catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
         }
 
-        return 0;
     }
 
     public int buscarIdPorCpf(String cpf) {
         String sql = "SELECT id_funcionario FROM funcionario WHERE cpf = ?";
         try {
 
-            PreparedStatement stmt = conectar.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = conectar.prepareStatement(sql);
 
             stmt.setString(1, cpf);
             try (ResultSet rs = stmt.executeQuery()) {
